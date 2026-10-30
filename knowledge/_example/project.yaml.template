@@ -1,0 +1,43 @@
+# Project Configuration Template
+# ================================
+# Copy this folder and rename it to your project ID.
+# Then customize the values below and register in registry.yaml.
+#
+# Steps:
+#   1. Copy _example/ → knowledge/<your_project_id>/
+#   2. Rename this file to project.yaml
+#   3. Fill in the values below
+#   4. Add the project to knowledge/registry.yaml
+#   5. Place your Excel test data in data/testdata/
+
+project_id: my_project          # must match folder name and registry key
+name: "My Project API"
+description: "Description of your API"
+api_type: rest                  # graphql | rest | mixed
+
+# Authentication profile
+auth:
+  type: bearer_token            # oauth2_client_credentials | bearer_token | device_code | auth_code | token_prompt
+  provider: azure_easyauth      # azure_ad | azure_easyauth | custom
+  description: "How authentication works for this API"
+
+# Default environment
+default_env: qa
+
+# Path overrides — relative to workspace root
+path_overrides:
+  environments: "config/environments"
+  schemas: "data/schemas"
+  testdata: "data/testdata"
+  suites: "Execution/TestSuites"
+
+# Excel workbook files (relative to testdata path above)
+workbooks:
+  default: "MyProject_TestData.xlsx"
+
+# ADO integration (fill in when configured)
+ado:
+  project: ""
+  plan_id: 0
+  suite_id: 0
+  area_path: ""

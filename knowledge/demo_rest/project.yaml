@@ -1,0 +1,34 @@
+# Demo REST Project Configuration
+# ================================
+# Uses JSONPlaceholder (https://jsonplaceholder.typicode.com)
+# No authentication required — free public API for demos.
+
+project_id: demo_rest
+name: "Demo REST API"
+description: "JSONPlaceholder public REST APIs — Posts, Comments, Users, Todos"
+api_type: rest
+
+# Authentication profile
+auth:
+  type: none
+  description: "No authentication required — public API"
+
+# Default environment
+default_env: demo_rest
+
+# Path overrides — point to shared data locations
+path_overrides:
+  environments: "config/environments"
+  testdata: "data/testdata"
+  suites: "Execution/TestSuites"
+
+# Excel workbook files (relative to testdata path)
+workbooks:
+  default: "Demo_REST_TestData.xlsx"
+
+# ADO integration (not configured for demo)
+ado:
+  project: ""
+  plan_id: 0
+  suite_id: 0
+  area_path: ""

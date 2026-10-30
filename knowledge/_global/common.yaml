@@ -1,0 +1,46 @@
+# Global Knowledge — Shared Across All Projects
+# ================================================
+# Common assertion patterns, validation templates, and auth profiles
+# that any project can inherit. The knowledge resolver merges these
+# with project-specific settings.
+
+# Common HTTP status code validations
+status_code_checks:
+  success: [200, 201, 204]
+  client_error: [400, 401, 403, 404, 422]
+  server_error: [500, 502, 503]
+
+# Common assertion patterns reusable across projects
+assertion_templates:
+  - name: "response_not_empty"
+    test_type: "response_not_empty"
+    description: "Verify API returns a non-empty response"
+
+  - name: "status_code_200"
+    test_type: "status_code"
+    expected_value: "200"
+    description: "Verify API returns HTTP 200 OK"
+
+  - name: "response_time_under_5s"
+    test_type: "response_time"
+    expected_value: "5000"
+    description: "Verify API responds within 5 seconds"
+
+  - name: "schema_valid"
+    test_type: "schema_validation"
+    description: "Verify response matches JSON schema"
+
+# Auth profile templates
+auth_profiles:
+  azure_ad_client_credentials:
+    type: oauth2_client_credentials
+    grant_type: client_credentials
+    token_endpoint_pattern: "https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
+
+  bearer_token:
+    type: bearer
+    description: "Pre-acquired bearer token (skip OAuth2)"
+
+  cookie_auth:
+    type: cookie
+    description: "Cookie-based auth (AppServiceAuthSession)"

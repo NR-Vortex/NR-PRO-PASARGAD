@@ -1,0 +1,47 @@
+# Knowledge Library — Project Registry
+# =====================================
+# Master index of all projects managed by this framework.
+# The knowledge resolver uses this file to discover projects
+# and resolve their artifact paths.
+#
+# To add a new project:
+#   1. Create a folder under knowledge/<project_id>/
+#   2. Add a project.yaml inside it (see example below)
+#   3. Register it here under the "projects:" section
+#
+# You can also run tests WITHOUT registering a project by passing
+# excel_path directly: data_driven_tool(action="run_all", params={"excel_path": "data/testdata/MyTests.xlsx"})
+
+projects:
+  # ── Built-in Demo Projects (no auth required) ──────────────────────
+  demo_rest:
+    name: "Demo REST API"
+    description: "JSONPlaceholder public REST APIs — no auth required"
+    api_type: rest
+    default_env: demo_rest
+
+  demo_graphql:
+    name: "Demo GraphQL API"
+    description: "Countries GraphQL API — no auth required"
+    api_type: graphql
+    default_env: demo_graphql
+
+  # ── Add your own projects below ────────────────────────────────────
+  # my_project:
+  #   name: "My REST API"
+  #   description: "My application's REST APIs"
+  #   api_type: rest             # graphql | rest | mixed
+  #   default_env: qa
+  #   ado_project: ""            # ADO project name (fill when ADO is configured)
+  #   ado_suite_id: 0            # default test suite ID
+  #   ado_area_match:            # keywords to match in US area_path or tags
+  #     - "MyProject"
+  #   api_type: graphql
+  #   default_env: qa
+  #   ado_project: ""
+  #   ado_suite_id: 0
+
+defaults:
+  env: qa
+  parallel: true
+  max_workers: 10

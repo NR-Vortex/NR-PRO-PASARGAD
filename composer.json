@@ -1,6 +1,6 @@
-﻿{
+{
     "name": "nrpro/nr-pro-pasargad",
-    "description": "NR PRO PASARGAD - Modular Telegram Bot and PasarGuard Platform",
+    "description": "NR PRO PASARGAD - Modular Telegram Bot & PasarGuard Platform",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -17,6 +17,12 @@
         }
     },
     "config": {
+        "optimize-autoloader": true,
         "sort-packages": true
+    },
+    "scripts": {
+        "check": [
+            "@php -v"
+        ]
     }
 }
