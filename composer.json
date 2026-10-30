@@ -1,0 +1,22 @@
+﻿{
+    "name": "nrpro/nr-pro-pasargad",
+    "description": "NR PRO PASARGAD - Modular Telegram Bot and PasarGuard Platform",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "NRPro\\Pasargad\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NRPro\\Pasargad\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,33 @@
+﻿# Environment
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Runtime storage
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+/storage/cache/*
+!/storage/cache/.gitkeep
+
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+/storage/backups/*
+!/storage/backups/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.tmp
+*.log
