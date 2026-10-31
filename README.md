@@ -1,41 +1,174 @@
-﻿# NR PRO PASARGAD
+<div align="center" dir="rtl">
 
-Modular Telegram Bot & PasarGuard Management Platform.
+# ⚡ NRX VPN
 
-## Project
+### ربات تلگرام و هسته مدیریت پنل‌های VPN
 
-NR PRO PASARGAD is a modular platform for:
+**3X-UI / Sanaei · Marzban · PHP · PostgreSQL · Redis**
 
-- Telegram bot management
-- VPN subscription sales
-- PasarGuard API integration
-- Reseller management
-- Telegram bot factory
-- Panel management
-- Payment and wallet services
-- Admin dashboard
+**NRX VPN — Modular VPN Panel Management Telegram Bot**
 
-## Architecture
+![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=flat-square&logo=php&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-Queue-DC382D?style=flat-square&logo=redis&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Development%20Preview-F59E0B?style=flat-square)
 
-Modular Monolith
+[معرفی](#-معرفی-پروژه) · [امکانات](#-امکانات-پیادهسازیشده-و-در-حال-آزمایش) · [راهاندازی](#-راهاندازی-محلی) · [نقشه راه](#-نقشه-راه) · [امنیت](#-امنیت)
 
-## Technology
+</div>
 
-- PHP 8.2+
-- Composer
-- PostgreSQL
-- Redis
-- Telegram Bot API
-- PasarGuard REST API
-- Docker
+> [!IMPORTANT]
+> **نسخه فعلی یک پیش‌نمایش توسعه است، نه یک محصول آماده استفاده در سرور اصلی.**
+> هنوز نصب‌کننده تک‌خطی و تأییدشده برای VPS منتشر نشده است. به اسکریپت‌های ناشناس با عنوان «نصب مستقیم NRX» اعتماد نکنید. اتصال به پنل یا ربات واقعی و فعال‌سازی نوشتن در دیتابیس فقط پس از بررسی و آزمون جداگانه انجام شود.
 
-## Status
+## ✨ معرفی پروژه
 
-Initial project structure.
+**NRX VPN** نام برندِ در حال توسعه برای پروژه **NR PRO PASARGAD** است: یک سامانه ماژولار مبتنی بر PHP برای ساخت ربات تلگرام و یکپارچه‌سازی مدیریت پنل‌های VPN. هدف ما ایجاد زیرساختی قابل‌توسعه است که کد تلگرام، درایور پنل‌ها، صف پردازش، اتصال پایگاه داده و منطق امنیتی از یکدیگر مستقل باشند.
 
-Development in progress.
+این مخزن در حال حاضر **هسته فنی و ابزارهای تست** را در اختیار می‌گذارد؛ نه یک فروشگاه کامل و آماده بهره‌برداری. قابلیت‌های فروش اشتراک، کیف پول، پرداخت، نمایندگی و ربات‌ساز به‌عنوان **اهداف توسعه آتی** در نظر گرفته شده‌اند.
 
-## Deployment
+**کلیدواژه‌ها:** ربات فروش VPN، ربات مدیریت پنل سنایی، 3X-UI Telegram Bot، ربات مرزبان، Marzban Bot، VPN Panel Manager، PHP Telegram Bot.
 
-Local development first.
-Production deployment after testing.
+## 🧩 امکانات پیاده‌سازی‌شده و در حال آزمایش
+
+| بخش | توضیح | وضعیت |
+| :--- | :--- | :--- |
+| 🧱 هسته PHP | Bootstrap، Container، تنظیمات محیطی، Routing و Logging | کد موجود؛ پیش‌نمایش |
+| 🤖 تلگرام | Client، دریافت Webhook، پردازش دستورها و منوی مدیریت | کد موجود؛ نیازمند تست نهایی |
+| 🌐 3X-UI / Sanaei | درایور API برای بررسی اتصال و عملیات حساب | کد موجود؛ سازگاری با نسخه‌های مختلف نیازمند آزمون |
+| 🌐 Marzban | درایور API برای بررسی اتصال و عملیات حساب | کد موجود؛ نیازمند آزمون با محیط آزمایشی |
+| 📬 صف | Redis Queue، Worker و سناریوهای تست ایزوله | کد موجود؛ تست‌های محلی انجام شده |
+| 🗄️ PostgreSQL | اتصال دیتابیس، Migrationهای اولیه و لایه Persistence | کد موجود؛ استقرار نهایی تأیید نشده |
+| 🔐 اطلاعات پنل | رمزنگاری اعتبارنامه پنل با AES-256-GCM | پیاده‌سازی اولیه |
+| 🛡️ کنترل تغییر وضعیت | Write Gateway با محدودیت‌های صریح برای نوشتن در دیتابیس | پیش‌فرض غیرفعال؛ نیازمند بررسی محیط اجرا |
+| 🛍️ فروش و پرداخت | فروشگاه، درگاه پرداخت و کیف پول | در نقشه راه؛ **آماده نیست** |
+| 👥 نمایندگی و ربات‌ساز | مدیریت نمایندگان و ساخت ربات مجزا | در نقشه راه؛ **آماده نیست** |
+
+> وجود نام یک ماژول یا مسیر در ساختار پروژه الزاماً به‌معنی آماده‌بودن آن برای کاربران نهایی نیست.
+
+## 🏗 معماری
+
+پروژه با الگوی **Modular Monolith** و Autoload مطابق **PSR-4** طراحی شده است.
+
+```text
+NR-PRO-PASARGAD/
+├── bootstrap/                 # راه‌اندازی و وابستگی‌های برنامه
+├── public/                    # ورودی HTTP و Webhook
+├── src/
+│   ├── Core/                  # Config / Database / Queue / Routing / Logging
+│   ├── Integrations/
+│   │   └── Telegram/          # Client / Commands / Webhook / Keyboards
+│   └── Modules/
+│       └── Vpn/
+│           ├── Drivers/       # ThreeXuiDriver / MarzbanDriver
+│           ├── Http/          # HTTP transport
+│           ├── Persistence/   # Repository و کنترل نوشتن
+│           └── Security/      # رمزنگاری و کنترل عملیات
+├── database/migrations/       # Migrationهای اولیه PostgreSQL
+├── scripts/local/             # ابزارهای بررسی و تست توسعه
+├── docs/                      # مستندات
+├── composer.json
+└── .env.example
+```
+
+بعضی پوشه‌های دیگر مخزن فعلاً فقط اسکلت معماری هستند.
+
+## 🧰 فناوری‌ها و پیش‌نیازها
+
+- **PHP 8.2 یا جدیدتر** و **Composer** (وابستگی Redis در Composer: `predis/predis`)
+- PostgreSQL برای عملیات مرتبط با پایگاه داده
+- Redis برای صف پیام و Worker
+- اکستنشن‌های لازم PHP مطابق عملکرد هر بخش، از جمله PDO PostgreSQL، cURL و OpenSSL
+- توکن ربات تلگرام فقط برای سناریوهایی که واقعاً به Telegram API متصل می‌شوند
+
+## 🚀 راه‌اندازی محلی
+
+دستورهای زیر صرفاً برای **توسعه و بررسی محلی** هستند، نه نصب عمومی روی VPS.
+
+```bash
+git clone https://github.com/NR-Vortex/NR-PRO-PASARGAD.git
+cd NR-PRO-PASARGAD
+git switch release/nrx-source-preview-20261031
+composer install
+```
+
+فایل `.env.example` را به `.env` کپی کنید و فقط تنظیمات محیط آزمایشی خودتان را وارد کنید:
+
+**Windows PowerShell:**
+
+```powershell
+Copy-Item .env.example .env
+```
+
+**Linux:**
+
+```bash
+cp .env.example .env
+```
+
+برای بررسی ورودی وب روی دستگاه محلی، در ریشه پروژه اجرا کنید:
+
+```bash
+php -S 127.0.0.1:8000 -t public
+```
+
+سپس آدرس `http://127.0.0.1:8000/health` را بررسی کنید. موفقیت این مسیر فقط نشان‌دهنده پاسخ HTTP اولیه است و **سلامت Redis، PostgreSQL یا تلگرام را تأیید نمی‌کند**.
+
+راهنمای دقیق‌تر: **[docs/INSTALLATION.md](docs/INSTALLATION.md)**
+
+## 🔌 درباره نصب مستقیم روی سرور
+
+طراحی یک دستور نصب سریع مانند پنل‌های شناخته‌شده در برنامه توسعه NRX قرار دارد؛ اما **هیچ دستور نصب تک‌خطیِ آزمایش‌شده‌ای در این نسخه وجود ندارد**. قبل از انتشار چنین دستوری باید نصب، بروزرسانی، بازگشت به نسخه قبلی، مدیریت Secret، نسخه PHP، Docker، Migration و عدم تداخل با سرویس‌های VPS تأیید شود.
+
+تا آن زمان، از کپی‌کردن دستورهای `curl | bash` ناشناس و فعال‌سازی سرویس‌های واقعی بدون تست خودداری کنید.
+
+## 🧪 بررسی‌ها
+
+در `scripts/local/` ابزارهایی برای بررسی جریان پنل، Queue، Webhook و سناریوهای ایزوله قرار دارند. برخی تست‌ها نیازمند سرویس Redis محلی یا پیکربندی خاص هستند و نباید روی VPS اصلی اجرا شوند.
+
+تست ایزوله Worker (فقط با محیط تست تنظیم‌شده و Redis محلی):
+
+```bash
+php scripts/local/worker-isolated-check.php --offline-worker
+```
+
+> این اسکریپت خود به Redis تست متصل می‌شود و برای اجرای عمومی بدون آماده‌سازی محیط مناسب نیست. حالت‌های `--once-live` و `--loop-live` مربوط به ارسال واقعی تلگرام هستند و در راهنمای آزمایشی توصیه نمی‌شوند.
+
+## 🔐 امنیت
+
+- `.env`، توکن تلگرام، رمز پایگاه داده و کلید رمزنگاری را **هرگز** در Git، Issue عمومی یا گزارش‌ها منتشر نکنید.
+- عملیات نوشتن وضعیت پنل به‌صورت پیش‌فرض **غیرفعال** است و برای فعال‌سازی نیاز به کنترل‌های اضافی دارد؛ فعال‌سازی آن جزو مراحل نصب عادی نیست.
+- درایورها را ابتدا با پنل‌های آزمایشی و دسترسی محدود بررسی کنید.
+- فایل `.env.example` صرفاً الگوی بدون رمز است؛ برای سرور واقعی TLS، کنترل دسترسی و مدیریت محرمانه‌ها باید مستقل ارزیابی شوند.
+- هر اطلاعات حساسی که قبلاً در Git منتشر شده است، با حذف فایل از Commit جدید امن نمی‌شود؛ رمزها باید تعویض و تاریخچه بررسی شوند.
+
+اطلاعات بیشتر: **[docs/SECURITY.md](docs/SECURITY.md)**
+
+## 🛣 نقشه راه
+
+1. تکمیل تست‌های یکپارچه و بازبینی امنیتی کدهای تلگرام، PostgreSQL و Redis
+2. آزمون سازگاری واقعی درایورهای 3X-UI و Marzban در محیط Staging
+3. تهیه Docker Compose تولید با شبکه خصوصی Redis و مدیریت امن Secret
+4. ساخت نصب‌کننده قابل‌اعتماد و آزمایش‌شده برای Linux VPS + بروزرسانی و Rollback
+5. تکمیل امکانات خرید اشتراک، فروشگاه، کیف پول و پرداخت
+6. افزودن ابزار مدیریت نمایندگی، دسترسی‌های پیشرفته و ربات‌ساز
+7. انتشار نسخه‌بندی‌شده با CI، Changelog و مستندات پشتیبانی
+
+## 📚 مستندات و مشارکت
+
+- [راهنمای توسعه و راه‌اندازی](docs/INSTALLATION.md)
+- [راهنمای امنیت](docs/SECURITY.md)
+- [تاریخچه تغییرات](CHANGELOG.md)
+- [Pull Request نسخه پیش‌نمایش](https://github.com/NR-Vortex/NR-PRO-PASARGAD/pull/1)
+
+ایرادها و پیشنهادهای توسعه را می‌توان از طریق Issue یا Pull Request ثبت کرد. اطلاعات محرمانه یا رمز را در Issue عمومی نفرستید.
+
+---
+
+<div align="center">
+
+**NRX VPN · Built to evolve**
+
+**Development Preview — Not Production Ready**
+
+</div>
