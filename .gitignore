@@ -31,3 +31,9 @@ Thumbs.db
 # Temporary
 *.tmp
 *.log
+
+# Local backup files
+*.bak-*
+
+# Local backup files
+*.bak-*
